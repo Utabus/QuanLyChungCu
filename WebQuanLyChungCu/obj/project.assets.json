@@ -9598,11 +9598,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\WebQuanLyChungCu\\WebQuanLyChungCu\\WebQuanLyChungCu.csproj",
+      "projectUniqueName": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\Gitcode\\QuanLyChungCu\\WebQuanLyChungCu\\WebQuanLyChungCu.csproj",
       "projectName": "WebQuanLyChungCu",
-      "projectPath": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\WebQuanLyChungCu\\WebQuanLyChungCu\\WebQuanLyChungCu.csproj",
+      "projectPath": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\Gitcode\\QuanLyChungCu\\WebQuanLyChungCu\\WebQuanLyChungCu.csproj",
       "packagesPath": "C:\\Users\\SV\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\WebQuanLyChungCu\\WebQuanLyChungCu\\obj\\",
+      "outputPath": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\Gitcode\\QuanLyChungCu\\WebQuanLyChungCu\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

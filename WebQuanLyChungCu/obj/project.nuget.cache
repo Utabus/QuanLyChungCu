@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ApxvrST4m4ht4OHhs9zw6GpO96m1/xZcAJNesw7ykOZz7Xm6WllACD1UjOdFGZoDiLlzmOP+s2+ha88U3/h1Ng==",
+  "dgSpecHash": "k2oi9cn7X3ii3X8gtOrpx6wBp5/F4MeK542AP8XcholwUslHrpLTiZszQz58M950Lz23bgNWTOSAkK2OD8Z+sA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\WebQuanLyChungCu\\WebQuanLyChungCu\\WebQuanLyChungCu.csproj",
+  "projectFilePath": "C:\\Users\\SV\\Desktop\\DuAnCaNhan\\code thue\\Gitcode\\QuanLyChungCu\\WebQuanLyChungCu\\WebQuanLyChungCu.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SV\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\SV\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
