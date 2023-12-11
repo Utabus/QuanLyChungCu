@@ -3,7 +3,7 @@
         <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                    <img src="../../LayoutAdmin/assets/images/faces/face1.jpg" alt="profile">
+                    <img src="~/LayoutAdmin/assets/images/faces/face1.jpg" alt="profile">
                     <span class="login-status online"></span>
                     <!--change to offline or busy as needed-->
                 </div>
@@ -34,8 +34,8 @@
             </div>
         </li>*@
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <span class="menu-title">Quản lý cư dân</span>
+            <a class="nav-link" asp-action="Index" asp-controller="Request">
+                <span class="menu-title">Phản hồi cư dân</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
            
@@ -47,40 +47,40 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="">Tòa nhà </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Căn hộ</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Cư dân </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Đồng hồ nước</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">Đồng hồ điện</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Building">Tòa nhà </a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Apartment">Căn hộ</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Account">Cư dân </a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="WaterMeter">Đồng hồ nước</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="ElectricMeter">Đồng hồ điện</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" asp-action="Index" asp-controller="Revenue">
                 <span class="menu-title">Quản lý phí </span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" asp-action="Index" asp-controller="News">
                 <span class="menu-title">Truyền thông</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
             </a>
         </li>
                 <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" asp-action="Index" asp-controller="Service">
                 <span class="menu-title">Tiện ích</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
             </a>
         </li>
                 <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" asp-action="Index" asp-controller="Account">
                 <span class="menu-title">Import dữ liệu</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" asp-action="Index" asp-controller="Account">
                 <span class="menu-title">Lịch sử</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
             </a>

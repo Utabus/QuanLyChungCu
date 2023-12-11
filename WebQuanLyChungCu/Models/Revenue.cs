@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace WebQuanLyChungCu.Models
+{
+    public partial class Revenue
+    {
+        public int RevenueId { get; set; }
+        public int? ApartmentId { get; set; }
+        public decimal? TotalMoney { get; set; }
+        public decimal? Pay { get; set; }
+        public decimal? Debt { get; set; }
+        public decimal? ServiceFee { get; set; }
+        public string? CodeVoucher { get; set; }
+        public decimal? ReceivingMoney { get; set; }
+        public DateTime? DayCreat { get; set; }
+        public DateTime? DayPay { get; set; }
+        public byte? Payments { get; set; }
+        public int? AccountId { get; set; }
+        public byte? Status { get; set; }
+
+        public virtual Apartment? Apartment { get; set; }
+    }
+}

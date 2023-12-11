@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Apartment>
+
+<div class="page-header">
+    <h3  class="page-title"> DANH SÁCH CĂN HỘ </h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Tables</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">DANH SÁCH CĂN HỘ </h4>
+            <a asp-action="Create" class="btn btn-success mb-2">Thêm</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> MÃ CĂN HỘ </th>
+                        <th> TÊN CĂN HỘ  </th>
+                        <th> BLOCK  </th>
+                        <th> SỐ NHÂN KHẨU </th>
+                        <th> DIỆN TÍCH   </th>
+                        <th> NGÀY BÀN GIAO  </th>
+                        <th> THAO TÁC  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td class="py-1">
+                                @item.ApartmentCode
+                            </td>
+                            <td> @item.ApartmentName </td>
+                            <td>
+                               @item.Building?.BuildingName
+                            </td>
+                            <td> 0 </td>
+                            <td> @item.Area m2 </td>
+                            <td> @item.StartDay </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ApartmentId" class="action-icon"> <i class="mdi mdi-eye" style="color:#19b6ff;font-size:25px;"></i>  </a>
+                                <a asp-action="Edit" asp-route-id="@item.ApartmentId" class="action-icon"> <i class="mdi mdi-square-edit-outline" style="color:#ffd83b;font-size:25px;"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.ApartmentId" class="action-icon"> <i class="mdi mdi-delete" style="color:#e75555;font-size:25px;"></i></a>
+                            </td>
+                        </tr>
+                        
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
