@@ -12,7 +12,8 @@ namespace WebQuanLyChungCu.Models
         public decimal? Debt { get; set; }
         public decimal? ServiceFee { get; set; }
         public string? CodeVoucher { get; set; }
-        public decimal? ReceivingMoney { get; set; }
+        public double? WaterNumber { get; set; }
+        public double? ElectricNumber { get; set; }
         public DateTime? DayCreat { get; set; }
         public DateTime? DayPay { get; set; }
         public byte? Payments { get; set; }
@@ -20,5 +21,6 @@ namespace WebQuanLyChungCu.Models
         public byte? Status { get; set; }
 
         public virtual Apartment? Apartment { get; set; }
+        public virtual Account? Account { get; set; }
     }
 }

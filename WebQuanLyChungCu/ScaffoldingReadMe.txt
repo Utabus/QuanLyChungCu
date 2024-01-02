@@ -10,3 +10,10 @@ Add the following code to the Configure method in your Application's Startup cla
             pattern : "{area:exists}/{controller=Home}/{action=Index}/{id?}"
           );
         });
+
+
+đăng nhâp 2 phần 
+- admin sẽ phân biệt bằng role xem tài khoản có phải của admin ko 
+r mới đăng nhập  nếu tk người dùng đá về user 
+- người dùng cho phép tất cả các loại tk đăng nhập 
+- store procedue 

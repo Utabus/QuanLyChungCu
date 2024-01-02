@@ -1,9 +1,11 @@
 using AspNetCoreHero.ToastNotification;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using WebQuanLyChungCu.Models;
-using WebQuanLyChungCu.Models.IReponsitory;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,22 @@ builder.Services.AddNotyf(config => { config.DurationInSeconds = 3; config.IsDis
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "ChungCu.Cookies";
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+        options.SlidingExpiration = true;
+        options.LoginPath = "/Admin/Account/Login";
+        options.AccessDeniedPath = "/admin";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,8 +49,18 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseSession();
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "UpLoads")
+        ),
+    RequestPath = "/contents"
+});
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(

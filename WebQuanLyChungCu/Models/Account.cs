@@ -12,6 +12,7 @@ namespace WebQuanLyChungCu.Models
 
         public int AccountId { get; set; }
         public int? ApartmentId { get; set; }
+        public string? Code { get; set; }
         public string? Avartar { get; set; }
         public string? UserName { get; set; }
         public string? Password { get; set; }

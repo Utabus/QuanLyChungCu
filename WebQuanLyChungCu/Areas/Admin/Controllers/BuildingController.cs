@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebQuanLyChungCu.Models;
@@ -6,6 +7,7 @@ using WebQuanLyChungCu.Models;
 namespace WebQuanLyChungCu.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin, NhanVien")]
     public class BuildingController : Controller
     {
         private QUANLYCHUNGCUContext _context;
@@ -19,10 +21,12 @@ namespace WebQuanLyChungCu.Areas.Admin.Controllers
         {
             return View(await _context.Buildings.ToListAsync());
         }
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Building building)
@@ -52,6 +56,7 @@ namespace WebQuanLyChungCu.Areas.Admin.Controllers
             }
             return View(ToaNha);
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Buildings == null)
@@ -65,7 +70,7 @@ namespace WebQuanLyChungCu.Areas.Admin.Controllers
             }
             return View(ToaNha);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Building building)
@@ -81,7 +86,7 @@ namespace WebQuanLyChungCu.Areas.Admin.Controllers
             _notyfService.Success("Sửa thành công");
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Buildings == null)
@@ -95,6 +100,7 @@ namespace WebQuanLyChungCu.Areas.Admin.Controllers
             }
             return View(ToaNha);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

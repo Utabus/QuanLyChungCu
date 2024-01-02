@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebQuanLyChungCu.Models
 {
@@ -7,8 +8,10 @@ namespace WebQuanLyChungCu.Models
     {
         public int WaterMeterId { get; set; }
         public int? ApartmentId { get; set; }
+        [Column(TypeName = "datetime2(7)")]
         public DateTime? RegistrationDate { get; set; }
         public string? Code { get; set; }
+        [Column(TypeName = "datetime2(7)")]
         public DateTime? DeadingDate { get; set; }
         public double? NumberOne { get; set; }
         public double? NumberEnd { get; set; }

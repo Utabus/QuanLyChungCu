@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebQuanLyChungCu.Models
 {
@@ -9,6 +9,7 @@ namespace WebQuanLyChungCu.Models
         public string? Title { get; set; }
         public string? Slug { get; set; }
         public string? Image { get; set; }
+        [Column(TypeName = "ntext")]
         public string? Description { get; set; }
         public DateTime? CreateDay { get; set; }
         public byte? Status { get; set; }

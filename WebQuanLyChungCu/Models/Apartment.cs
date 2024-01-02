@@ -22,7 +22,7 @@ namespace WebQuanLyChungCu.Models
         public string? ApartmentName { get; set; }
         public int? ApartmentNumber { get; set; }
         public int? FloorNumber { get; set; }
-        public DateTime StartDay { get; set; }
+        public DateTime? StartDay { get; set; }
         public double? Area { get; set; }
         public byte? Status { get; set; }
 

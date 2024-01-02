@@ -1,7 +1,6 @@
-﻿
-
+﻿@model IEnumerable<Account>
 <div class="page-header">
-    <h3 class="page-title"> Danh sách căn hộ </h3>
+    <h3 style="font-family:Helvetica;" class="page-title"> DANH SÁCH CƯ DÂN </h3>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Tables</a></li>
@@ -9,63 +8,74 @@
         </ol>
     </nav>
 </div>
-
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Danh sách căn hộ </h4>
+            <h4 style="font-family:Helvetica;" class="card-title"> DANH SÁCH CƯ DÂN </h4>
+            <div class="d-flex justify-content-between">
 
-            </p>
+                <a asp-action="Create" class="btn btn-success mb-2">Thêm</a>
+
+
+                <div class="ml-auto">
+                    <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Import File Excel
+                    </button>
+
+                </div>
+            </div>
+            @await Html.PartialAsync("_PartialViewCreateList", new Account())
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th> MÃ CƯ DÂN </th>
+                        <th> HỌ TÊN & NGÀY SINH  </th>
                         <th> MÃ CĂN HỘ </th>
-                        <th> TÊN CĂN HỘ  </th>
-                        <th> Họ Tên & Ngày sinh  </th>
-                        <th> SỐ NHÂN KHẨU </th>
-                        <th> QUAN HỆ   </th>
-                        <th> QUỐC TỊCH  </th>
-                        <th> TÌNH TRẠNG  </th>
+                        <th> TÊN CĂN HỘ </th>
+                        <th> QUAN HỆ  </th>
+                        <th>    QUỐC TỊCH </th>
+                        <th> TRẠNG THÁI  </th>
                         <th> THAO TÁC  </th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td class="py-1">
-                            <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
-                        </td>
-                        <td> Herman Beck </td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </td>
-                        <td> $ 77.99 </td>
-                        <td> May 15, 2015 </td>
-                        <td> May 15, 2015 </td>
-                        <td> May 15, 2015 </td>
-                    </tr>
-
-                    <tr>
-                        <td class="py-1">
-                            <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
-                        </td>
-                        <td> Messsy Adam </td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </td>
-                        <td> $245.30 </td>
-                        <td> July 1, 2015 </td>
-                        <td> July 1, 2015 </td>
-                        <td> July 1, 2015 </td>
-                    </tr>
-
-
-
-
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="py-1">
+                                @item.Code
+                            </td>
+                            <td>
+                                <div style="margin-bottom:5px;">
+                                    @item.Info?.FullName
+                                </div>
+                                <div>
+                                    @item.Info?.BirthDay
+                                </div>
+                            </td>
+                            <td>
+                                @item.Apartment?.ApartmentCode
+                            </td>
+                            <td> @item.Apartment?.ApartmentName </td>
+                            <td> @item.Relationship?.RelationshipName </td>
+                            <td> @item.Info?.Country </td>
+                            @if (item.Status == 1)
+                            {
+                                <td> Hoạt động </td>
+                            }@if (item.Status == 2)
+                            {
+                                <td>Ngừng Hoạt động </td>
+                            }@if (item.Status == 3)
+                            {
+                                <td> Đang bảo trì </td>
+                            }
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.AccountId" class="action-icon"> <i class="mdi mdi-eye" style="color:#19b6ff;font-size:25px;"></i>  </a>
+                                <a asp-action="Edit" asp-route-id="@item.AccountId" class="action-icon"> <i class="mdi mdi-square-edit-outline" style="color:#ffd83b;font-size:25px;"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.AccountId" class="action-icon"> <i class="mdi mdi-delete" style="color:#e75555;font-size:25px;"></i></a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebQuanLyChungCu.Models;
 
@@ -16,18 +17,32 @@ namespace WebQuanLyChungCu.Controllers
             _context = context;
             _notyfService = notyfService;
         }
-            
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            var bangtin = await _context.News
+                .Where(x => x.Status == 1)
+                .OrderByDescending(x => x.CreateDay)
+                .Take(3)
+                .ToListAsync();
+            ViewBag.Bangtin = bangtin;
+            return View();
+        } 
+        public IActionResult GioiThieu()
         {
 
             return View();
         }
-        public IActionResult Getdata()
+        public async Task<IActionResult> TinTuc()
         {
-            var data = _context.Buildings.ToList();
-            return Ok(data);
-        }
+            var bangtin = await _context.News.Where(x => x.Status == 1).ToListAsync();
 
+            return View(bangtin);
+        }
+        public IActionResult LienHe()
+        {
+
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

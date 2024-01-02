@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Building>
+@using System.Security.Claims
 
+@{
+    var roles = Context.User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+}
 
 <style>
     .body {
@@ -22,7 +26,10 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">DANH SÁCH TÒA NHÀ </h4>
+             @if (string.Join(", ", roles) == "Admin")
+                {
             <a asp-action="Create" class="btn btn-success mb-2">Thêm</a>
+                }
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -59,12 +66,16 @@
                             {
                                 <td> Đang bảo trì </td>
                             }
-                          
+
                             <td>
-                                <a asp-action="Details" asp-route-id="@item.BuildingId" class="action-icon"> <i class="mdi mdi-eye" style="color:#19b6ff;font-size:25px;"></i>  </a>
-                                <a asp-action="Edit" asp-route-id="@item.BuildingId" class="action-icon"> <i class="mdi mdi-square-edit-outline" style="color:#ffd83b;font-size:25px;"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.BuildingId" class="action-icon"> <i class="mdi mdi-delete" style="color:#e75555;font-size:25px;"></i></a>
+                                @if (string.Join(", ", roles) == "Admin")
+                                {
+                                    <a asp-action="Details" asp-route-id="@item.BuildingId" class="action-icon"> <i class="mdi mdi-eye" style="color:#19b6ff;font-size:25px;"></i>  </a>
+                                    <a asp-action="Edit" asp-route-id="@item.BuildingId" class="action-icon"> <i class="mdi mdi-square-edit-outline" style="color:#ffd83b;font-size:25px;"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.BuildingId" class="action-icon"> <i class="mdi mdi-delete" style="color:#e75555;font-size:25px;"></i></a>
+                                }
                             </td>
+                            
                         </tr>
 
                     }

@@ -17,7 +17,7 @@ namespace WebQuanLyChungCu.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
-        public virtual DbSet<Address> Addresses { get; set; } = null!;
+      //  public virtual DbSet<Address> Addresses { get; set; } = null!;
         public virtual DbSet<Apartment> Apartments { get; set; } = null!;
         public virtual DbSet<ApartmentService> ApartmentServices { get; set; } = null!;
         public virtual DbSet<Building> Buildings { get; set; } = null!;
@@ -79,12 +79,12 @@ namespace WebQuanLyChungCu.Models
                     .HasConstraintName("FK_Account_Role").OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<Address>(entity =>
-            {
-                entity.ToTable("Address");
+            //modelBuilder.Entity<Address>(entity =>
+            //{
+            //    entity.ToTable("Address");
 
-                entity.Property(e => e.Ward).HasColumnName("ward");
-            });
+            //    entity.Property(e => e.Ward).HasColumnName("ward");
+            //});
 
             modelBuilder.Entity<Apartment>(entity =>
             {
@@ -194,7 +194,7 @@ namespace WebQuanLyChungCu.Models
             {
                 entity.ToTable("InFo");
 
-                entity.HasIndex(e => e.AddressId, "IX_InFo_AddressId");
+                //entity.HasIndex(e => e.AddressId, "IX_InFo_AddressId");
 
                 entity.Property(e => e.BirthDay)
                     .HasMaxLength(10)
@@ -205,10 +205,10 @@ namespace WebQuanLyChungCu.Models
                     .IsUnicode(false)
                     .HasColumnName("CMND_CCCD");
 
-                entity.HasOne(d => d.Address)
-                    .WithMany(p => p.InFos)
-                    .HasForeignKey(d => d.AddressId)
-                    .HasConstraintName("FK_InFo_Address").OnDelete(DeleteBehavior.Cascade);
+                //entity.HasOne(d => d.Address)
+                //    .WithMany(p => p.InFos)
+                //    .HasForeignKey(d => d.AddressId)
+                //    .HasConstraintName("FK_InFo_Address").OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<News>(entity =>
@@ -254,7 +254,6 @@ namespace WebQuanLyChungCu.Models
 
                 entity.Property(e => e.Pay).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.ReceivingMoney).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.ServiceFee).HasColumnType("decimal(18, 0)");
 

@@ -38,6 +38,9 @@ namespace WebQuanLyChungCu.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -72,35 +75,6 @@ namespace WebQuanLyChungCu.Migrations
                     b.ToTable("Account", (string)null);
                 });
 
-            modelBuilder.Entity("WebQuanLyChungCu.Models.Address", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"), 1L, 1);
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("District")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ward")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ward");
-
-                    b.HasKey("AddressId");
-
-                    b.ToTable("Address", (string)null);
-                });
-
             modelBuilder.Entity("WebQuanLyChungCu.Models.Apartment", b =>
                 {
                     b.Property<int>("ApartmentId")
@@ -129,7 +103,7 @@ namespace WebQuanLyChungCu.Migrations
                     b.Property<int?>("FloorNumber")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDay")
+                    b.Property<DateTime?>("StartDay")
                         .HasColumnType("datetime2");
 
                     b.Property<byte?>("Status")
@@ -238,6 +212,8 @@ namespace WebQuanLyChungCu.Migrations
 
                     b.HasKey("ContractId");
 
+                    b.HasIndex("AccountId");
+
                     b.HasIndex(new[] { "ApartmentId" }, "IX_Contract_ApartmentId");
 
                     b.ToTable("Contract", (string)null);
@@ -322,13 +298,13 @@ namespace WebQuanLyChungCu.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InfoId"), 1L, 1);
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BirthDay")
+                    b.Property<DateTime?>("BirthDay")
                         .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
+                        .HasColumnType("datetime2")
                         .IsFixedLength();
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CmndCccd")
                         .HasMaxLength(50)
@@ -336,15 +312,28 @@ namespace WebQuanLyChungCu.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("CMND_CCCD");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte?>("Sex")
                         .HasColumnType("tinyint");
 
-                    b.HasKey("InfoId");
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex(new[] { "AddressId" }, "IX_InFo_AddressId");
+                    b.Property<string>("Ward")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InfoId");
 
                     b.ToTable("InFo", (string)null);
                 });
@@ -361,7 +350,7 @@ namespace WebQuanLyChungCu.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("ntext")
                         .HasColumnName("description");
 
                     b.Property<string>("Image")
@@ -465,14 +454,14 @@ namespace WebQuanLyChungCu.Migrations
                     b.Property<decimal?>("Debt")
                         .HasColumnType("decimal(18,0)");
 
+                    b.Property<double?>("ElectricNumber")
+                        .HasColumnType("float");
+
                     b.Property<decimal?>("Pay")
                         .HasColumnType("decimal(18,0)");
 
                     b.Property<byte?>("Payments")
                         .HasColumnType("tinyint");
-
-                    b.Property<decimal?>("ReceivingMoney")
-                        .HasColumnType("decimal(18,0)");
 
                     b.Property<decimal?>("ServiceFee")
                         .HasColumnType("decimal(18,0)");
@@ -483,7 +472,12 @@ namespace WebQuanLyChungCu.Migrations
                     b.Property<decimal?>("TotalMoney")
                         .HasColumnType("decimal(18,0)");
 
+                    b.Property<double?>("WaterNumber")
+                        .HasColumnType("float");
+
                     b.HasKey("RevenueId");
+
+                    b.HasIndex("AccountId");
 
                     b.HasIndex(new[] { "ApartmentId" }, "IX_Revenue_ApartmentId");
 
@@ -638,10 +632,16 @@ namespace WebQuanLyChungCu.Migrations
 
             modelBuilder.Entity("WebQuanLyChungCu.Models.Contract", b =>
                 {
+                    b.HasOne("WebQuanLyChungCu.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId");
+
                     b.HasOne("WebQuanLyChungCu.Models.Apartment", "Apartment")
                         .WithMany("Contracts")
                         .HasForeignKey("ApartmentId")
                         .HasConstraintName("FK_Contract_Apartment");
+
+                    b.Navigation("Account");
 
                     b.Navigation("Apartment");
                 });
@@ -666,17 +666,6 @@ namespace WebQuanLyChungCu.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("WebQuanLyChungCu.Models.InFo", b =>
-                {
-                    b.HasOne("WebQuanLyChungCu.Models.Address", "Address")
-                        .WithMany("InFos")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_InFo_Address");
-
-                    b.Navigation("Address");
-                });
-
             modelBuilder.Entity("WebQuanLyChungCu.Models.ResidentsRequired", b =>
                 {
                     b.HasOne("WebQuanLyChungCu.Models.Apartment", "Apartment")
@@ -690,11 +679,17 @@ namespace WebQuanLyChungCu.Migrations
 
             modelBuilder.Entity("WebQuanLyChungCu.Models.Revenue", b =>
                 {
+                    b.HasOne("WebQuanLyChungCu.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId");
+
                     b.HasOne("WebQuanLyChungCu.Models.Apartment", "Apartment")
                         .WithMany("Revenues")
                         .HasForeignKey("ApartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_Revenue_Apartment");
+
+                    b.Navigation("Account");
 
                     b.Navigation("Apartment");
                 });
@@ -713,11 +708,6 @@ namespace WebQuanLyChungCu.Migrations
             modelBuilder.Entity("WebQuanLyChungCu.Models.Account", b =>
                 {
                     b.Navigation("Histories");
-                });
-
-            modelBuilder.Entity("WebQuanLyChungCu.Models.Address", b =>
-                {
-                    b.Navigation("InFos");
                 });
 
             modelBuilder.Entity("WebQuanLyChungCu.Models.Apartment", b =>
